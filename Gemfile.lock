@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    pirsch_api (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.14.3)
+    rake (12.3.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.0)
+  pirsch_api!
+  rake (~> 12.0)
+
+BUNDLED WITH
+   2.1.4
