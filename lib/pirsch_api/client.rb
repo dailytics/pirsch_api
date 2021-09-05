@@ -1,18 +1,9 @@
 # frozen_string_literal: true
 
-require 'pirsch_api/token'
-require 'pirsch_api/base'
-require 'pirsch_api/domain'
-
-require 'json'
-require "net/http"
-require "uri"
-require "cgi"
-
 module PirschApi
   class Client
     
-    BASE_URL = 'https://api.pirsch.io'
+    BASE_URL = 'https://api.pirsch.io/api/v1'
 
     def initialize(client_id, client_secret)
       @client_id     = client_id.to_s
@@ -20,11 +11,11 @@ module PirschApi
     end
 
     def token
-      PirschApi::Token.new(@client_id, @client_secret).run
+      TokenResource.new(@client_id, @client_secret).run
     end
 
     def domains
-      @domains ||= PirschApi::Domain.new(token).run
+      @domains ||= DomainResource.new(token.access_token).run
     end
 
     def valid?

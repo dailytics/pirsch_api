@@ -1,5 +1,5 @@
 module PirschApi
-  class Base
+  class BaseResource
     def initialize(access_token = nil, filters = nil)
       @access_token = access_token
       @filters      = filters
@@ -11,7 +11,7 @@ module PirschApi
     end
 
     def parse_response(body)
-      JSON.parse(body)
+      raise NotImplementedError
     end
 
     def errors
@@ -26,7 +26,7 @@ module PirschApi
     def run
       raise PirschApi::Error.new errors unless valid?
       
-      uri = URI.parse(request_url)
+      uri = URI.parse "#{PirschApi::Client::BASE_URL}/#{request_url}"
 
       req = Net::HTTP::Get.new(uri.request_uri)
       req.add_field('Authorization', "Bearer #{@access_token}")

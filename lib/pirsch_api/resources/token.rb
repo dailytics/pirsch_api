@@ -1,6 +1,6 @@
 module PirschApi
   
-  class Token
+  class TokenResource
 
     def initialize(client_id, client_secret)
       @client_id     = client_id
@@ -8,7 +8,7 @@ module PirschApi
     end
     
     def request_url
-      "https://api.pirsch.io/api/v1/token"
+      "token"
     end
 
     def request_body
@@ -19,12 +19,12 @@ module PirschApi
     end
 
     def parse_response(body)
-      JSON.parse(body)['access_token']
+      Token.new JSON.parse(body)
     end
 
     def run
-      uri = URI.parse request_url
-      
+      uri = URI.parse "#{PirschApi::Client::BASE_URL}/#{request_url}"
+      puts uri
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -34,7 +34,8 @@ module PirschApi
       request.body = request_body
       
       response = http.request(request)
-      raise PirschApi::Error.new "Token request failed. (#{response.body})" unless response.code == "200"
+
+      raise Error.new "Token request failed. (#{response.body})" unless response.code == "200"
       
       parse_response(response.body)
     end
