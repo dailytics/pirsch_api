@@ -15,8 +15,13 @@ c = PirschApi::Client.new('<client_id>', '<client_secret>')
 c.valid?
 => true
 
-# Get a new Access Token
+# Get a new Access Token (you don't need to call this method)
 c.token
+=> "ASD!@#....."
+
+# Get a list of all domains
+c.domains
+=> [{"id"=>"0D3...xG", "user_id"=>"0D3...G", "hostname"=>"pirsch.io", "subdomain"=>"pirsch", "timezone"=>"UTC", ...}]
 ```
 
 
