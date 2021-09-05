@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'pirsch_api/token'
+require 'pirsch_api/base'
+require 'pirsch_api/domain'
 
 require 'json'
 require "net/http"
@@ -18,7 +20,11 @@ module PirschApi
     end
 
     def token
-      @token ||= PirschApi::Token.new(@client_id, @client_secret).run
+      PirschApi::Token.new(@client_id, @client_secret).run
+    end
+
+    def domains
+      @domains ||= PirschApi::Domain.new(token).run
     end
 
     def valid?
