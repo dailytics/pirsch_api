@@ -19,12 +19,13 @@ module PirschApi
     end
 
     def parse_response(body)
+      puts "[Pirsch API] Token received"
       Token.new JSON.parse(body)
     end
 
     def run
       uri = URI.parse "#{PirschApi::Client::BASE_URL}/#{request_url}"
-      puts uri
+      puts "[Pirsch API] Requesting Token..."
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE

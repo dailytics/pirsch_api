@@ -5,7 +5,6 @@ module PirschApi
     end
 
     def parse_response(body)
-      puts body
       JSON.parse(body).map{ |o| Domain.new o }
     end
   end
