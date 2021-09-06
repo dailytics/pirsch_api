@@ -20,67 +20,62 @@ client.valid?
 ```
 
 You will need a `Domain` as a parameter to all the following methods. This parameter could be either
-a `PisrchApi::Domain` instance or a simple String containing the `id` of one domain.
+a `PirschApi::Domain` instance or a simple String containing the `id` of one domain.
 
 ```rb
 # Get /domains
 client.domains
 => [#<PirschApi::Domain id="0D3a...", user_id="0D3a...", hostname="pirsch.io", subdomain="pirsch", ... >]
-domain = c.domains.first
-domain.hostname
-=> "pirsch.io"
-domain.id
-=> "0D3a..."
-domain.to_s
-=> "0D3a..."
+domain = client.domains.first
 ```
+
 All the following methods receive a `domain` and an optional `filters` hash as a parameter. You can include any filter defined in the official documentation.
 
 ```rb
 # Get /statistics/visitors
-client.visitors(domain: domain)
+client.visitors(domain: domain, filters: filters)
 
 # Get /statistics/active
-client.active(domain: domain)
+client.active(domain: domain, filters: filters)
 
 # Get /statistics/pages
-client.pages(domain: domain)
+client.pages(domain: domain, filters: filters)
 
 # Get /statistics/referrers
-client.referrers(domain: domain)
+client.referrers(domain: domain, filters: filters)
 
 # Get /statistics/growth
-client.growth(domain: domain)
+client.growth(domain: domain, filters: filters)
 
 # Get /statistics/events
-client.events(domain: domain)
+client.events(domain: domain, filters: filters)
 
 # Get /statistics/utm/source
-client.utm_source(domain: domain)
+client.utm_source(domain: domain, filters: filters)
 
 # Get /statistics/utm/medium
-client.utm_medium(domain: domain)
+client.utm_medium(domain: domain, filters: filters)
 
 # Get /statistics/utm/campaign
-client.utm_campaign(domain: domain)
+client.utm_campaign(domain: domain, filters: filters)
 ```
 
 ## Examples
 ```rb
-
-client.visitors(domain: d)
+client.visitors(domain: domain)
 => [#<PirschApi::Visitor day="2021-08-30T00:00:00Z", visitors=87, views=200, sessions=125, bounces=53, bounce_rate=0.6091954022988506>, #<PirschApi::Visitor day="2021-08-31T00:00:00Z", visitors=77, views=159, sessions=113, bounces=49, bounce_rate=0.6363636363636364>, #<PirschApi::Visitor day="2021-09-01T00:00:00Z", visitors=76, views=161, sessions=110, bounces=48, bounce_rate=0.631578947368421>, #<PirschApi::Visitor day="2021-09-02T00:00:00Z", visitors=79, views=152, sessions=130, bounces=52, bounce_rate=0.6582278481012658>, #<PirschApi::Visitor day="2021-09-03T00:00:00Z", visitors=53, views=109, sessions=68, bounces=26, bounce_rate=0.49056603773584906>, #<PirschApi::Visitor day="2021-09-04T00:00:00Z", visitors=54, views=126, sessions=71, bounces=31, bounce_rate=0.5740740740740741>, #<PirschApi::Visitor day="2021-09-05T00:00:00Z", visitors=116, views=202, sessions=131, bounces=84, bounce_rate=0.7241379310344828>, #<PirschApi::Visitor day="2021-09-06T00:00:00Z", visitors=1, views=1, sessions=1, bounces=1, bounce_rate=1>]
 
-client.visitors(domain: d, filters: { from: '2021-09-01' })
+client.visitors(domain: domain, filters: { from: '2021-09-01' })
 => [#<PirschApi::Visitor day="2021-09-01T00:00:00Z", visitors=76, views=161, sessions=110, bounces=48, bounce_rate=0.631578947368421>, #<PirschApi::Visitor day="2021-09-02T00:00:00Z", visitors=79, views=152, sessions=130, bounces=52, bounce_rate=0.6582278481012658>, #<PirschApi::Visitor day="2021-09-03T00:00:00Z", visitors=53, views=109, sessions=68, bounces=26, bounce_rate=0.49056603773584906>, #<PirschApi::Visitor day="2021-09-04T00:00:00Z", visitors=54, views=126, sessions=71, bounces=31, bounce_rate=0.5740740740740741>, #<PirschApi::Visitor day="2021-09-05T00:00:00Z", visitors=116, views=202, sessions=131, bounces=84, bounce_rate=0.7241379310344828>, #<PirschApi::Visitor day="2021-09-06T00:00:00Z", visitors=1, views=1, sessions=1, bounces=1, bounce_rate=1>]
 
-client.visitors(domain: d, filters: { from: '2021-09-01' }).first.day
+client.visitors(domain: domain, filters: { from: '2021-09-01' }).first.day
 => "2021-09-01T00:00:00Z"
 
 # Get /statistics/active
-client.active(domain: d)
+client.active(domain: domain)
 => #<PirschApi::Active stats=nil, visitors=0>
-client.active(domain: d).visitors
+
+client.active(domain: domain).visitors
 => 0
 ```
 
