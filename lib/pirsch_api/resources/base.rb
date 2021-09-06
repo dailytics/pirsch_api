@@ -31,7 +31,7 @@ module PirschApi
       raise PirschApi::Error.new errors unless valid?
       
       if domain
-        filters[:id] = domain.id
+        filters[:id] = domain.to_s
       end
 
       url = "#{PirschApi::Client::BASE_URL}/#{request_url}"
