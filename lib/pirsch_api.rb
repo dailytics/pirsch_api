@@ -21,6 +21,8 @@ module PirschApi
   autoload :UtmSourceResource, "pirsch_api/resources/statistics/utm_source"
   autoload :UtmCampaignResource, "pirsch_api/resources/statistics/utm_campaign"
   autoload :UtmMediumResource, "pirsch_api/resources/statistics/utm_medium"
+  autoload :DurationSessionResource, "pirsch_api/resources/statistics/duration_session"
+  autoload :DurationPageResource, "pirsch_api/resources/statistics/duration_page"
 
   autoload :Object, "pirsch_api/object"
   autoload :Token, "pirsch_api/objects/token"
@@ -34,4 +36,6 @@ module PirschApi
   autoload :UtmSource, "pirsch_api/objects/utm_source"
   autoload :UtmCampaign, "pirsch_api/objects/utm_campaign"
   autoload :UtmMedium, "pirsch_api/objects/utm_medium"
+  autoload :DurationSession, "pirsch_api/objects/duration_session"
+  autoload :DurationPage, "pirsch_api/objects/duration_page"
 end

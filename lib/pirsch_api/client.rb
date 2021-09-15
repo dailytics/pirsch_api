@@ -57,5 +57,13 @@ module PirschApi
     def utm_campaign(filters: {}, domain:)
       UtmCampaignResource.new(client: self, filters: filters, domain: domain).run
     end
+
+    def duration_session(filters: {}, domain:)
+      DurationSessionResource.new(client: self, filters: filters, domain: domain).run
+    end
+
+    def duration_page(filters: {}, domain:)
+      DurationPageResource.new(client: self, filters: filters, domain: domain).run
+    end
   end
 end

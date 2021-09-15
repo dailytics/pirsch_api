@@ -58,6 +58,13 @@ client.utm_medium(domain: domain, filters: filters)
 
 # Get /statistics/utm/campaign
 client.utm_campaign(domain: domain, filters: filters)
+
+# Get /statistics/duration/session
+client.duration_session(domain: domain, filters: filters)
+
+# Get /statistics/duration/page
+client.duration_page(domain: domain, filters: filters)
+
 ```
 
 ## Examples
