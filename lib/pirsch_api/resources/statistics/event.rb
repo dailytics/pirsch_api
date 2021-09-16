@@ -4,7 +4,7 @@ module PirschApi
       "statistics/events"
     end
     def parse_response(body)
-      JSON.parse(body).map{ |o| Event.new o }
+      JSON.parse(body)&.map{ |o| Event.new o }
     end
   end
 end

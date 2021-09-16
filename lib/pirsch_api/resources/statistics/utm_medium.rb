@@ -5,7 +5,7 @@ module PirschApi
     end
     
     def parse_response(body)
-      JSON.parse(body).map{ |o| UtmMedium.new o }
+      JSON.parse(body)&.map{ |o| UtmMedium.new o }
     end
   end
 end
