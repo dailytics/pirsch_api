@@ -1,6 +1,5 @@
 module PirschApi
   class BaseResource
-
     attr_accessor :client, :filters, :domain
 
     def initialize(client:, domain: nil, filters: {})
@@ -19,7 +18,7 @@ module PirschApi
     end
 
     def errors
-      @errors[:client] = 'client is invalid' unless client.valid?
+      @errors[:client] = "client is invalid" unless client.valid?
       @errors
     end
 
@@ -29,24 +28,24 @@ module PirschApi
 
     def run
       raise PirschApi::Error.new errors unless valid?
-      
+
       if domain
         filters[:id] = domain.to_s
       end
 
       url = "#{PirschApi::Client::BASE_URL}/#{request_url}"
-      url << "?#{filters.to_a.map { |x| "#{x[0]}=#{x[1]}" }.join("&") }" if filters.any?
+      url << "?#{filters.to_a.map { |x| "#{x[0]}=#{CGI.escape(x[1])}" }.join("&")}" if filters.any?
 
       puts "[Pirsch API] run #{url}"
 
       uri = URI.parse url
 
       req = Net::HTTP::Get.new(uri.request_uri)
-      req.add_field('Authorization', "Bearer #{client.token.access_token}")
+      req.add_field("Authorization", "Bearer #{client.token.access_token}")
 
       http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true  
-      
+      http.use_ssl = true
+
       response = http.request(req)
       raise PirschApi::Error.new "Api request failed (#{response.body})" unless response.code == "200"
       raise PirschApi::Error.new "Api request returned nil (#{response.body})" if response.body.nil?
