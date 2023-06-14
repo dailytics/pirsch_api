@@ -34,7 +34,7 @@ module PirschApi
       end
 
       url = "#{PirschApi::Client::BASE_URL}/#{request_url}"
-      url << "?#{filters.to_a.map { |x| "#{x[0]}=#{CGI.escape(x[1])}" }.join("&")}" if filters.any?
+      url << "?#{filters.to_a.map { |x| "#{x[0]}=#{CGI.escape(x[1].to_s)}" }.join("&")}" if filters.any?
 
       puts "[Pirsch API] run #{url}"
 
