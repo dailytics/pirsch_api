@@ -2,16 +2,17 @@
 
 module PirschApi
   class Client
-    
-    BASE_URL = 'https://api.pirsch.io/api/v1'
+    BASE_URL = "https://api.pirsch.io/api/v1"
 
     def initialize(client_id:, client_secret:)
-      @client_id     = client_id.to_s
+      @client_id = client_id.to_s
       @client_secret = client_secret.to_s
     end
 
     def valid?
-      true if token rescue false
+      true if token
+    rescue
+      false
     end
 
     def token
@@ -22,47 +23,47 @@ module PirschApi
       DomainResource.new(client: self).run
     end
 
-    def visitors(filters: {}, domain:)
+    def visitors(domain:, filters: {})
       VisitorResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def pages(filters: {}, domain:)
+    def pages(domain:, filters: {})
       PageResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def referrers(filters: {}, domain:)
+    def referrers(domain:, filters: {})
       ReferrerResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def active(filters: {}, domain:)
+    def active(domain:, filters: {})
       ActiveResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def growth(filters: {}, domain:)
+    def growth(domain:, filters: {})
       GrowthResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def events(filters: {}, domain:)
+    def events(domain:, filters: {})
       EventResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def utm_source(filters: {}, domain:)
+    def utm_source(domain:, filters: {})
       UtmSourceResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def utm_medium(filters: {}, domain:)
+    def utm_medium(domain:, filters: {})
       UtmMediumResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def utm_campaign(filters: {}, domain:)
+    def utm_campaign(domain:, filters: {})
       UtmCampaignResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def duration_session(filters: {}, domain:)
+    def duration_session(domain:, filters: {})
       DurationSessionResource.new(client: self, filters: filters, domain: domain).run
     end
 
-    def duration_page(filters: {}, domain:)
+    def duration_page(domain:, filters: {})
       DurationPageResource.new(client: self, filters: filters, domain: domain).run
     end
   end

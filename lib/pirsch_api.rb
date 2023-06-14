@@ -1,9 +1,9 @@
-require 'json'
+require "json"
 require "net/http"
 require "uri"
 require "cgi"
 
-require 'pirsch_api/version'
+require "pirsch_api/version"
 
 module PirschApi
   autoload :Client, "pirsch_api/client"
